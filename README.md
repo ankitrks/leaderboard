@@ -1,4 +1,4 @@
-# Leaderboard API Project
+## Leaderboard API Project
 This project is a Django-based REST API for managing a leaderboard. Users can gain or lose points, and the leaderboard updates and reorders based on these points. Additionally, the project includes scheduled tasks to identify the user with the highest points at regular intervals.
 
 ## Features
