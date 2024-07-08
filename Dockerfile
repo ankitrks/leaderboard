@@ -12,9 +12,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         gcc \
         libc-dev \
+        redis-server \
     && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get install -y redis-server
 
 # Start Redis as a background service
 CMD ["redis-server", "/etc/redis/redis.conf"]
