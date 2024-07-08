@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: .
+    container_name: django_backend
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      gunicorn leaderboard_project.wsgi:application --bind 0.0.0.0:8080
+      "
+    ports:
+      - "8080:8080"
+    env_file:
+        - .env
+    volumes:
+      - .:/app
+      - ./leaderboard:/app/leaderboard
+      - ./staticfiles:/app/staticfiles
+    environment:
+      - DEBUG=1
+      - DB_ENGINE=django.db.backends.sqlite3
+      - DB_NAME=/app/db.sqlite3
+    depends_on:
+      - redis
+
+  celery_worker:
+    build: .
+    container_name: celery_worker
+    command: celery -A tasks worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - backend
+
+  celery_beat:
+    build: .
+    container_name: celery_beat
+    command: celery -A tasks beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - backend
