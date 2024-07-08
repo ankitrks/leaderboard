@@ -20,19 +20,19 @@ This project is a Django-based REST API for managing a leaderboard. Users can ga
 Create a `.env` file in the root directory with the following content:
 
 ```
-SECRET_KEY=your_secret_key
+SECRET_KEY=<secret_key>
 DEBUG=True
 ALLOWED_HOSTS=*
 DATABASE_URL=sqlite:///db.sqlite3
 REDIS_URL=redis://redis:6379
-AWS_ACCESS_KEY_ID=your_aws_access_key_id
-AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
-AWS_STORAGE_BUCKET_NAME=your_s3_bucket_name
-AWS_S3_REGION_NAME=your_s3_region
+AWS_ACCESS_KEY_ID=<aws_access_key_id>
+AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
+AWS_STORAGE_BUCKET_NAME=<s3_bucket_name>
+AWS_S3_REGION_NAME=<s3_region>
 ```
 
 ### Docker
-Ensure you have Docker and Docker Compose installed on your system.
+Ensure you have Docker and Docker Compose installed on the system.
 
 ### Installation
 Clone the repository:
