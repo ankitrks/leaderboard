@@ -24,8 +24,6 @@ services:
       - ./staticfiles:/app/staticfiles
     environment:
       - DEBUG=1
-      - DB_ENGINE=django.db.backends.sqlite3
-      - DB_NAME=/app/db.sqlite3
     depends_on:
       - redis
 
