@@ -12,11 +12,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         gcc \
         libc-dev \
-        redis-server \
     && rm -rf /var/lib/apt/lists/*
-
-# Start Redis as a background service
-CMD ["redis-server", "/etc/redis/redis.conf"]
 
 # Install Python dependencies
 COPY requirements.txt /app/
@@ -40,5 +36,3 @@ EXPOSE 8080
 
 # Run the application with gunicorn
 CMD ["gunicorn", "--workers=3", "leaderboard_project.wsgi:application", "--bind", "0.0.0.0:8080"]
-CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
-CMD ["celery", "-A", "tasks", "beat", "--loglevel=info"]

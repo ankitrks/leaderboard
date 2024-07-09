@@ -152,8 +152,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://redis:6379')
-CELERY_RESULT_BACKEND = os.getenv('REDIS_URL', 'redis://redis:6379')
+CELERY_BROKER_URL = config('REDIS_URL', default='redis://redis:6379')
+CELERY_RESULT_BACKEND = config('REDIS_URL', default='redis://redis:6379')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
