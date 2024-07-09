@@ -21,10 +21,4 @@ app.autodiscover_tasks()
 def debug_task(self):
     print(f'Request: {self.request!r}')
 
-app.conf.beat_schedule = {
-    'identify-winner-every-5-minutes': {
-        'task': 'tasks.identify_winner',
-        'schedule': crontab(minute='*/5'),
-    },
-}
 app.conf.timezone = 'UTC'

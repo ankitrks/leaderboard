@@ -2,21 +2,6 @@ from celery_app import app
 from django.utils import timezone
 
 @app.task
-def identify_winner():
-    from leaderboard.models import User, Winner
-
-    highest_points_users = User.objects.all().order_by('-points')
-    if not highest_points_users:
-        return
-
-    top_user = highest_points_users.first()
-    if highest_points_users.count() > 1 and highest_points_users[1].points == top_user.points:
-        # If there's a tie, do not declare a winner
-        return
-
-    Winner.objects.create(user=top_user, points=top_user.points, timestamp=timezone.now())
-
-@app.task
 def check_highest_points_user():
     from leaderboard.models import User, Winner
 
